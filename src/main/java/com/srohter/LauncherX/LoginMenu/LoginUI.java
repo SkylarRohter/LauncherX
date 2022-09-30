@@ -5,7 +5,6 @@ import com.srohter.LauncherX.LoginMenu.Utils.HyperlinkText;
 import com.srohter.LauncherX.LoginMenu.Utils.TextFieldPassword;
 import com.srohter.LauncherX.LoginMenu.Utils.TextFieldUsername;
 import com.srohter.LauncherX.LoginMenu.Utils.UIUtils;
-import com.srohter.LauncherX.MainMenu.MainMenu;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -188,7 +187,6 @@ public class LoginUI extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 loginEventHandler();
-                panel1.setVisible(false);
             }
 
             @Override
@@ -225,6 +223,6 @@ public class LoginUI extends JFrame {
     }
 
     private void loginEventHandler() {
-        new MainMenu();
+        toaster.warn("Login event");
     }
 }

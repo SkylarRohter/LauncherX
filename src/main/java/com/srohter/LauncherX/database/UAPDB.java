@@ -3,6 +3,7 @@ package com.srohter.LauncherX.database;
 import com.srohter.LauncherX.database.Utils.CheckAddArrayList;
 
 import java.util.ArrayList;
+
 public class UAPDB {
     private ArrayList<String> usernames = new ArrayList<>();
     private ArrayList<Integer> passwords = new ArrayList<>();
