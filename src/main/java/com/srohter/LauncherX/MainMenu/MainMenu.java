@@ -1,37 +1,22 @@
-package com.srohter.LauncherX.LoginMenu;
+package com.srohter.LauncherX.MainMenu;
 
 import com.srohter.LauncherX.LoginMenu.Toaster.Toaster;
 import com.srohter.LauncherX.LoginMenu.Utils.HyperlinkText;
 import com.srohter.LauncherX.LoginMenu.Utils.TextFieldPassword;
 import com.srohter.LauncherX.LoginMenu.Utils.TextFieldUsername;
 import com.srohter.LauncherX.LoginMenu.Utils.UIUtils;
-import com.srohter.LauncherX.MainMenu.MainMenu;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Objects;
 import javax.swing.*;
 
-public class LoginUI extends JFrame {
+public class MainMenu extends JFrame {
 
     private final Toaster toaster;
 
-    public LoginUI() {
+    public MainMenu() {
         JPanel mainJPanel = getMainJPanel();
-
-        addLogo(mainJPanel);
-
-        addSeparator(mainJPanel);
-
-        addUsernameTextField(mainJPanel);
-
-        addPasswordTextField(mainJPanel);
-
-        addLoginButton(mainJPanel);
-
-        addForgotPasswordButton(mainJPanel);
-
-        addRegisterButton(mainJPanel);
 
         this.add(mainJPanel);
         this.pack();
@@ -188,7 +173,6 @@ public class LoginUI extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 loginEventHandler();
-                panel1.setVisible(false);
             }
 
             @Override
@@ -225,6 +209,6 @@ public class LoginUI extends JFrame {
     }
 
     private void loginEventHandler() {
-        new MainMenu();
+        toaster.warn("Login event");
     }
 }
