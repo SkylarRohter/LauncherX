@@ -14,13 +14,14 @@ import javax.swing.*;
 public class LoginUI extends JFrame {
 
     private final Toaster toaster;
+    public TextFieldUsername usernameField = new TextFieldUsername();
 
     public LoginUI() {
         JPanel mainJPanel = getMainJPanel();
 
         addLogo(mainJPanel);
 
-        addSeparator(mainJPanel);
+        //addSeparator(mainJPanel);
 
         addUsernameTextField(mainJPanel);
 
@@ -103,7 +104,6 @@ public class LoginUI extends JFrame {
     }
 
     private void addUsernameTextField(JPanel panel1) {
-        TextFieldUsername usernameField = new TextFieldUsername();
 
         usernameField.setBounds(423, 109, 250, 44);
         usernameField.addFocusListener(new FocusListener() {
@@ -171,7 +171,7 @@ public class LoginUI extends JFrame {
                 int w = getWidth() - insets.left - insets.right;
                 int h = getHeight() - insets.top - insets.bottom;
                 g2.setColor(loginButtonColors[0]);
-                g2.fillRoundRect(insets.left, insets.top, w, h, UIUtils.ROUNDNESS, UIUtils.ROUNDNESS);
+                g2.fillRoundRect(insets.left, insets.top, 250, 44, UIUtils.ROUNDNESS, UIUtils.ROUNDNESS);//width height change size
 
                 FontMetrics metrics = g2.getFontMetrics(UIUtils.FONT_GENERAL_UI);
                 int x2 = (getWidth() - metrics.stringWidth(UIUtils.BUTTON_TEXT_LOGIN)) / 2;
@@ -223,6 +223,10 @@ public class LoginUI extends JFrame {
     }
 
     private void loginEventHandler() {
-        toaster.warn("Login event");
+        String username = null;
+        if(!usernameField.getText().equals(UIUtils.PLACEHOLDER_TEXT_USERNAME)){
+            username =usernameField.getText();
+        }
+        new LoginEvent(username,toaster);
     }
 }

@@ -14,6 +14,10 @@ public class UIUtils {
     public static final Color OFFWHITE = new Color(229, 229, 229);
 
     public static final String BUTTON_TEXT_LOGIN = "Login";
+    public static final String BUTTON_TEXT_OPENERS = "Openers";
+    public static final String BUTTON_TEXT_SETTINGS = "Settings";
+    public static final String BUTTON_TEXT_BROWSER = "Browser";
+    public static final String BUTTON_TEXT_ASSIGNMENTS = "Assignments";
     public static final String BUTTON_TEXT_FORGOT_PASS = "Forgot your password?";
     public static final String BUTTON_TEXT_REGISTER = "Register";
 
