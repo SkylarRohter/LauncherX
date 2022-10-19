@@ -5,8 +5,8 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import static com.srohter.LauncherX.LoginMenu.Utils.UIUtils.COLOR_OUTLINE;
-import static com.srohter.LauncherX.LoginMenu.Utils.UIUtils.FONT_FORGOT_PASSWORD;
+import static com.srohter.LauncherX.database.Utils.UIUtils.COLOR_OUTLINE;
+import static com.srohter.LauncherX.database.Utils.UIUtils.FONT_FORGOT_PASSWORD;
 import static java.awt.Cursor.*;
 
 public class HyperlinkText extends JLabel {

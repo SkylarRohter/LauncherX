@@ -1,23 +1,31 @@
 package com.srohter.LauncherX.LoginMenu;
 
+import com.srohter.LauncherX.LoginMenu.Login.LoginEvent;
+import com.srohter.LauncherX.LoginMenu.Resgister.RegisterEvent;
 import com.srohter.LauncherX.LoginMenu.Toaster.Toaster;
 import com.srohter.LauncherX.LoginMenu.Utils.HyperlinkText;
 import com.srohter.LauncherX.LoginMenu.Utils.TextFieldPassword;
 import com.srohter.LauncherX.LoginMenu.Utils.TextFieldUsername;
-import com.srohter.LauncherX.LoginMenu.Utils.UIUtils;
+import com.srohter.LauncherX.database.Utils.UIUtils;
+import com.srohter.LauncherX.MainMenu.MainMenu;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Objects;
 import javax.swing.*;
 
+/**
+ * @author Skylar Rohter
+ * @since 1.0
+ */
 public class LoginUI extends JFrame {
 
     private final Toaster toaster;
-    public TextFieldUsername usernameField = new TextFieldUsername();
+    private TextFieldUsername usernameField = new TextFieldUsername();
+    private TextFieldPassword passwordField = new TextFieldPassword();
+    private JPanel mainJPanel = getMainJPanel();
 
     public LoginUI() {
-        JPanel mainJPanel = getMainJPanel();
 
         addLogo(mainJPanel);
 
@@ -130,8 +138,6 @@ public class LoginUI extends JFrame {
     }
 
     private void addPasswordTextField(JPanel panel1) {
-        TextFieldPassword passwordField = new TextFieldPassword();
-
         passwordField.setBounds(423, 168, 250, 44);
         passwordField.addFocusListener(new FocusListener() {
             @Override
@@ -218,7 +224,7 @@ public class LoginUI extends JFrame {
 
     private void addRegisterButton(JPanel panel1) {
         panel1.add(new HyperlinkText(UIUtils.BUTTON_TEXT_REGISTER, 631, 300, () -> {
-            toaster.success("Register event");
+            new RegisterEvent(toaster,usernameField.getText(),passwordField.getPassword());
         }));
     }
 
@@ -227,6 +233,13 @@ public class LoginUI extends JFrame {
         if(!usernameField.getText().equals(UIUtils.PLACEHOLDER_TEXT_USERNAME)){
             username =usernameField.getText();
         }
-        new LoginEvent(username,toaster);
+        if(new LoginEvent(username, toaster, passwordField.getPassword()).login()){
+            setVisible(false);
+            new MainMenu().main();
+        }
+        else{
+            toaster.error("Incorrect Username or Password.");
+        }
+
     }
 }

@@ -1,5 +1,7 @@
 package com.srohter.LauncherX.LoginMenu.Utils;
 
+import com.srohter.LauncherX.database.Utils.UIUtils;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;

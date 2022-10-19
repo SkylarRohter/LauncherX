@@ -1,6 +1,6 @@
 package com.srohter.LauncherX.LoginMenu.Toaster;
 
-import com.srohter.LauncherX.LoginMenu.Utils.UIUtils;
+import com.srohter.LauncherX.database.Utils.UIUtils;
 
 import javax.swing.*;
 import java.awt.*;

@@ -4,19 +4,22 @@
  */
 package com.srohter.LauncherX.MainMenu;
 
-import com.srohter.LauncherX.LoginMenu.Utils.UIUtils;
+import com.srohter.LauncherX.LoginMenu.Toaster.Toaster;
+import com.srohter.LauncherX.database.Utils.ButtonStyle;
+import com.srohter.LauncherX.database.Utils.UIUtils;
 import com.srohter.LauncherX.database.Utils.Colors;
+import com.sun.tools.javac.Main;
 
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Objects;
+import java.util.Set;
 
 /**
- *
- * @author skylarrohter
+ * @author Skylar Rohter
+ * @since 1.0
  */
 public class MainMenu extends JFrame {
 
@@ -24,8 +27,10 @@ public class MainMenu extends JFrame {
      * Creates new form Login
      */
     public MainMenu() {
+        setBounds((UIUtils.width-1080)-(1080/4),(UIUtils.height-759)-(759/4),1080,759);
         setUndecorated(true);
         initComponents();
+        setResizable(false);
     }
 
     /**
@@ -43,30 +48,42 @@ public class MainMenu extends JFrame {
         jLabel1 = new javax.swing.JLabel();
         LogoBorder = new javax.swing.JPanel();
         OpenersBtn = new javax.swing.JLabel();
-        assBtn = new javax.swing.JButton();
-        browBtn = new javax.swing.JButton();
-        setBtn = new javax.swing.JButton();
+        assBtn = new javax.swing.JLabel();
+        browBtn = new javax.swing.JLabel();
+        setBtn = new javax.swing.JLabel();
         winBtns = new javax.swing.JPanel();
         sBtn = new javax.swing.JLabel();
         mBtn = new javax.swing.JLabel();
         xBtn = new javax.swing.JLabel();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
-        oFrame = new javax.swing.JInternalFrame();
-        AccentLabel = new javax.swing.JLabel();
+        DefaultPanel = new javax.swing.JPanel();
+        lxicon = new JLabel();
+        OpenersPanel = new JPanel();
+        AssPanel = new JPanel();
+        BrowPanel = new JPanel();
+        SetPanel = new JPanel();
+        ScrollAss = new JScrollPane();
+        AssTable = new JTable();
+
+
+        //Toaster
+        toaster = new Toaster(MenuPanel);
+
+        OpenersPanel.setVisible(false);
+        AssPanel.setVisible(false);
+        BrowPanel.setVisible(false);
+        SetPanel.setVisible(false);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         MainPanel.setBackground(Colors.BACKGROUND_COLOR);
         MainPanel.setForeground(new java.awt.Color(255, 51, 102));
 
-        MenuPanel.setBackground(Colors.BACKGROUND_COLOR);
-        MenuPanel.setBorder(javax.swing.BorderFactory.createLineBorder(Colors.TRIM_COLOR, 3));
-        MenuPanel.setToolTipText("");
+        MenuPanel.setBackground(UIUtils.COLOR_BACKGROUND_DARKER);
 
         jLabel1.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("ok.png")).getFile())); // NOI18N
 
         LogoBorder.setBackground(Colors.BACKGROUND_COLOR);
-        LogoBorder.setBorder(new javax.swing.border.LineBorder(Colors.TRIM_COLOR, 2, true));
+        LogoBorder.setBorder(new javax.swing.border.LineBorder(UIUtils.COLOR_INTERACTIVE, 2, true));
         LogoBorder.setPreferredSize(new java.awt.Dimension(280, 6));
 
         javax.swing.GroupLayout LogoBorderLayout = new javax.swing.GroupLayout(LogoBorder);
@@ -80,44 +97,113 @@ public class MainMenu extends JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        OpenersBtn.setBackground(Colors.BACKGROUND_COLOR);
-        OpenersBtn.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
-        OpenersBtn.setForeground(new java.awt.Color(255, 255, 255));
-        OpenersBtn.setBorder(javax.swing.BorderFactory.createLineBorder(Colors.TRIM_COLOR, 2));
-        OpenersBtn.setFocusable(false);
-        OpenersBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+        OpenersBtn.setBackground(UIUtils.COLOR_INTERACTIVE);
+        OpenersBtn.setFont(UIUtils.FONT_GENERAL_UI); // NOI18N
+        OpenersBtn.setForeground(UIUtils.COLOR_BACKGROUND);
+        OpenersBtn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        OpenersBtn.setText("Openers");
+        OpenersBtn.setOpaque(true);
+        OpenersBtn.addMouseListener(new MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                OpenersBtnMouseClicked(evt);
+                toaster.warn("Hello");
+                DefaultPanel.setVisible(false);
+                AssPanel.setVisible(false);
+                BrowPanel.setVisible(false);
+                SetPanel.setVisible(false);
+                OpenersPanel.setVisible(true);//TRUE
+            }
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                OpenersBtn.setBackground(UIUtils.COLOR_INTERACTIVE_DARKER);
+                OpenersBtn.setForeground(UIUtils.COLOR_BACKGROUND_DARKER);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                OpenersBtn.setBackground(UIUtils.COLOR_INTERACTIVE);
+                OpenersBtn.setForeground(UIUtils.COLOR_BACKGROUND);
             }
         });
 
 
-        assBtn.setBackground(Colors.BACKGROUND_COLOR);
-        assBtn.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
-        assBtn.setForeground(new java.awt.Color(255, 255, 255));
+        assBtn.setBackground(UIUtils.COLOR_INTERACTIVE);
+        assBtn.setFont(UIUtils.FONT_GENERAL_UI); // NOI18N
+        assBtn.setForeground(UIUtils.COLOR_BACKGROUND);
+        assBtn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         assBtn.setText("Assignments");
-        assBtn.setBorder(javax.swing.BorderFactory.createLineBorder(Colors.TRIM_COLOR, 2));
-        assBtn.setContentAreaFilled(false);
-        assBtn.setFocusable(false);
+        assBtn.setOpaque(true);
+        assBtn.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DefaultPanel.setVisible(false);
+                OpenersPanel.setVisible(false);
+                BrowPanel.setVisible(false);
+                SetPanel.setVisible(false);
+                AssPanel.setVisible(true);//TRUE
+            }
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                assBtn.setBackground(UIUtils.COLOR_INTERACTIVE_DARKER);
+                assBtn.setForeground(UIUtils.COLOR_BACKGROUND_DARKER);
+            }
 
-        browBtn.setBackground(Colors.BACKGROUND_COLOR);
-        browBtn.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
-        browBtn.setForeground(new java.awt.Color(255, 255, 255));
+            @Override
+            public void mouseExited(MouseEvent e) {
+                assBtn.setBackground(UIUtils.COLOR_INTERACTIVE);
+                assBtn.setForeground(UIUtils.COLOR_BACKGROUND);
+            }
+        });
+
+        browBtn.setBackground(UIUtils.COLOR_INTERACTIVE);
+        browBtn.setFont(UIUtils.FONT_GENERAL_UI); // NOI18N
+        browBtn.setForeground(UIUtils.COLOR_BACKGROUND);
+        browBtn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         browBtn.setText("Browser");
-        browBtn.setBorder(javax.swing.BorderFactory.createLineBorder(Colors.TRIM_COLOR, 2));
-        browBtn.setContentAreaFilled(false);
-        browBtn.setFocusable(false);
+        browBtn.setOpaque(true);
+        browBtn.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DefaultPanel.setVisible(false);
+                OpenersPanel.setVisible(false);
+                SetPanel.setVisible(false);
+                AssPanel.setVisible(false);
+                BrowPanel.setVisible(true);//TRUE
+            }
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                browBtn.setBackground(UIUtils.COLOR_INTERACTIVE_DARKER);
+                browBtn.setForeground(UIUtils.COLOR_BACKGROUND_DARKER);
+            }
 
-        setBtn.setBackground(Colors.BACKGROUND_COLOR);
-        setBtn.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
-        setBtn.setForeground(new java.awt.Color(255, 255, 255));
+            @Override
+            public void mouseExited(MouseEvent e) {
+                browBtn.setBackground(UIUtils.COLOR_INTERACTIVE);
+                browBtn.setForeground(UIUtils.COLOR_BACKGROUND);
+            }
+        });
+
+        setBtn.setBackground(UIUtils.COLOR_INTERACTIVE);
+        setBtn.setFont(UIUtils.FONT_GENERAL_UI); // NOI18N
+        setBtn.setForeground(UIUtils.COLOR_BACKGROUND);
+        setBtn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         setBtn.setText("Settings");
-        setBtn.setBorder(javax.swing.BorderFactory.createLineBorder(Colors.TRIM_COLOR, 2));
-        setBtn.setContentAreaFilled(false);
-        setBtn.setFocusable(false);
-        setBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                setBtnActionPerformed(evt);
+        setBtn.setOpaque(true);
+        setBtn.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DefaultPanel.setVisible(false);
+                OpenersPanel.setVisible(false);
+                BrowPanel.setVisible(false);
+                AssPanel.setVisible(false);
+                SetPanel.setVisible(true);//TRUE
+            }
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                setBtn.setBackground(UIUtils.COLOR_INTERACTIVE_DARKER);
+                setBtn.setForeground(UIUtils.COLOR_BACKGROUND_DARKER);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                setBtn.setBackground(UIUtils.COLOR_INTERACTIVE);
+                setBtn.setForeground(UIUtils.COLOR_BACKGROUND);
             }
         });
 
@@ -136,51 +222,25 @@ public class MainMenu extends JFrame {
         xBtn.setToolTipText("");
         xBtn.setSize(new java.awt.Dimension(48, 48));
 
-        javax.swing.GroupLayout winBtnsLayout = new javax.swing.GroupLayout(winBtns);
-        winBtns.setLayout(winBtnsLayout);
-        winBtnsLayout.setHorizontalGroup(
-                winBtnsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, winBtnsLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(mBtn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                                .addComponent(sBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(14, 14, 14)
-                                .addComponent(xBtn)
-                                .addContainerGap())
-        );
-        winBtnsLayout.setVerticalGroup(
-                winBtnsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(winBtnsLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(winBtnsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(mBtn)
-                                        .addComponent(sBtn)
-                                        .addComponent(xBtn))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout MenuPanelLayout = new javax.swing.GroupLayout(MenuPanel);
         MenuPanel.setLayout(MenuPanelLayout);
         MenuPanelLayout.setHorizontalGroup(
                 MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(MenuPanelLayout.createSequentialGroup()
-                                .addGroup(MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, MenuPanelLayout.createSequentialGroup()
-                                                        .addGap(19, 19, 19)
-                                                        .addComponent(jLabel1))
-                                                .addGroup(MenuPanelLayout.createSequentialGroup()
-                                                        .addGap(21, 21, 21)
-                                                        .addGroup(MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                                .addComponent(LogoBorder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                .addComponent(OpenersBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                .addComponent(assBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
-                                                                .addComponent(browBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                .addComponent(setBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGroup(MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, MenuPanelLayout.createSequentialGroup()
+                                                .addGap(19, 19, 19)
+                                                .addComponent(jLabel1))
                                         .addGroup(MenuPanelLayout.createSequentialGroup()
-                                                .addGap(99, 99, 99)
-                                                .addComponent(winBtns, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addGap(21, 21, 21)
+                                                .addGroup(MenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                                        .addComponent(setBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(browBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(assBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(OpenersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(MenuPanelLayout.createSequentialGroup()
+                                                .addGap(21, 21, 21)
+                                                .addComponent(LogoBorder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addContainerGap(22, Short.MAX_VALUE))
         );
         MenuPanelLayout.setVerticalGroup(
@@ -188,70 +248,140 @@ public class MainMenu extends JFrame {
                         .addGroup(MenuPanelLayout.createSequentialGroup()
                                 .addGap(24, 24, 24)
                                 .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(20,20,20)
                                 .addComponent(LogoBorder, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(winBtns, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
-                                .addComponent(OpenersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(61, 61, 61)
+                                .addGap(113, 113, 113)
+                                .addComponent(OpenersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(50, 50, 50)
                                 .addComponent(assBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(50, 50, 50)
                                 .addComponent(browBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(69, 69, 69)
+                                .addGap(50, 50, 50)
                                 .addComponent(setBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(80, 80, 80))
+                                .addGap(110, 110, 110))
         );
 
-        jDesktopPane1.setPreferredSize(new java.awt.Dimension(745, 0));
+        lxicon.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("lx.png")).getFile()));
 
-        oFrame.setBorder(null);
-        oFrame.setFocusCycleRoot(false);
-        oFrame.setFocusable(false);
-        oFrame.setRequestFocusEnabled(false);
-        oFrame.setVisible(true);
-        BasicInternalFrameUI bi = (BasicInternalFrameUI)oFrame.getUI();
-        bi.setNorthPane(null);
-
-        AccentLabel.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
-        AccentLabel.setText("Accent Color");
-
-        javax.swing.GroupLayout oFrameLayout = new javax.swing.GroupLayout(oFrame.getContentPane());
-        oFrame.getContentPane().setLayout(oFrameLayout);
-        oFrameLayout.setHorizontalGroup(
-                oFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(oFrameLayout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addComponent(AccentLabel)
-                                .addContainerGap(617, Short.MAX_VALUE))
+        javax.swing.GroupLayout DefaultPanelLayout = new javax.swing.GroupLayout(DefaultPanel);
+        DefaultPanel.setBackground(UIUtils.COLOR_BACKGROUND);
+        DefaultPanel.setLayout(DefaultPanelLayout);
+        DefaultPanelLayout.setHorizontalGroup(
+                DefaultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DefaultPanelLayout.createSequentialGroup()
+                                .addContainerGap(233, Short.MAX_VALUE)
+                                .addComponent(lxicon, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(209, 215, 220))
         );
-        oFrameLayout.setVerticalGroup(
-                oFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(oFrameLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(AccentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(665, Short.MAX_VALUE))
+        DefaultPanelLayout.setVerticalGroup(
+                DefaultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(DefaultPanelLayout.createSequentialGroup()
+                                .addGap(204, 204, 204)
+                                .addComponent(lxicon, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        DefaultPanel.setVisible(true);
+
+        //*********************************************************************************************************************************************
+
+
+        javax.swing.GroupLayout OpenersPanelLayout = new javax.swing.GroupLayout(OpenersPanel);
+        OpenersPanel.setBackground(Color.RED);
+        OpenersPanel.setLayout(OpenersPanelLayout);
+        OpenersPanelLayout.setHorizontalGroup(
+                OpenersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 803, Short.MAX_VALUE)
+        );
+        OpenersPanelLayout.setVerticalGroup(
+                OpenersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 740, Short.MAX_VALUE)
         );
 
-        jDesktopPane1.setLayer(oFrame, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-                jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(oFrame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        jDesktopPane1Layout.setVerticalGroup(
-                jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addComponent(oFrame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        try {
-            oFrame.setMaximum(true);
-        } catch (java.beans.PropertyVetoException e1) {
-            e1.printStackTrace();
+        //*********************************************************************************************************************************************
+
+
+        AssTable.setModel(new javax.swing.table.DefaultTableModel(
+                new Object [][] {
+                        {"10/10/2022", "IB Bio Textbool analysis", "Biology", null},
+                        {"10/14/2022", "BioQuiz1", "Mathamatics", null},
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null}
+                },
+                new String [] {
+                        "Due Date", "Name", "Class", "Notes"
+                }
+        ) {
+            Class[] types = new Class [] {
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        AssTable.getTableHeader().setReorderingAllowed(false);
+        ScrollAss.setViewportView(AssTable);
+        if (AssTable.getColumnModel().getColumnCount() > 0) {
+            AssTable.getColumnModel().getColumn(0).setResizable(false);
+            AssTable.getColumnModel().getColumn(1).setResizable(false);
+            AssTable.getColumnModel().getColumn(2).setResizable(false);
+            AssTable.getColumnModel().getColumn(3).setResizable(false);
         }
+
+        javax.swing.GroupLayout AssPanelLayout = new javax.swing.GroupLayout(AssPanel);
+        AssPanel.setLayout(AssPanelLayout);
+        AssPanelLayout.setHorizontalGroup(
+                AssPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(ScrollAss, javax.swing.GroupLayout.DEFAULT_SIZE, 803, Short.MAX_VALUE)
+        );
+        AssPanelLayout.setVerticalGroup(
+                AssPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AssPanelLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(ScrollAss, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+
+        //*********************************************************************************************************************************************
+
+
+        javax.swing.GroupLayout BrowPanelLayout = new javax.swing.GroupLayout(BrowPanel);
+        BrowPanel.setBackground(Color.GREEN);
+        BrowPanel.setLayout(BrowPanelLayout);
+        BrowPanelLayout.setHorizontalGroup(
+                BrowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 803, Short.MAX_VALUE)
+        );
+        BrowPanelLayout.setVerticalGroup(
+                BrowPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 740, Short.MAX_VALUE)
+        );
+
+
+        //*********************************************************************************************************************************************
+
+
+        javax.swing.GroupLayout SetPanelLayout = new javax.swing.GroupLayout(SetPanel);
+        SetPanel.setBackground(Color.YELLOW);
+        SetPanel.setLayout(SetPanelLayout);
+        SetPanelLayout.setHorizontalGroup(
+                SetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 803, Short.MAX_VALUE)
+        );
+        SetPanelLayout.setVerticalGroup(
+                SetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 740, Short.MAX_VALUE)
+        );
+
+
+        //*********************************************************************************************************************************************
 
         javax.swing.GroupLayout MainPanelLayout = new javax.swing.GroupLayout(MainPanel);
         MainPanel.setLayout(MainPanelLayout);
@@ -259,13 +389,26 @@ public class MainMenu extends JFrame {
                 MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(MainPanelLayout.createSequentialGroup()
                                 .addComponent(MenuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(1, 1, 1)
-                                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(DefaultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(OpenersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(AssPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BrowPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(SetPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+
         );
         MainPanelLayout.setVerticalGroup(
                 MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(MenuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
+                        .addComponent(DefaultPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(OpenersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(AssPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BrowPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(SetPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -331,7 +474,10 @@ public class MainMenu extends JFrame {
     }
 
     private void OpenersBtnActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        System.out.println("Called");
+        DefaultPanel.setVisible(false);
+        OpenersPanel.setVisible(true);
+        System.out.println(".");
     }
 
     private void setBtnActionPerformed(java.awt.event.ActionEvent evt) {
@@ -402,20 +548,29 @@ public class MainMenu extends JFrame {
             loginButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         }
     };
-    private javax.swing.JLabel AccentLabel;
-    private javax.swing.JPanel LogoBorder;
-    private javax.swing.JPanel MainPanel;
-    private javax.swing.JPanel MenuPanel;
-    private javax.swing.JLabel OpenersBtn;
-    private javax.swing.JButton assBtn;
-    private javax.swing.JButton browBtn;
-    private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JLabel jLabel1;
+    private JLabel AccentLabel;
+    private JPanel LogoBorder;
+    private JPanel MainPanel;
+    private JPanel MenuPanel;
+    private JLabel OpenersBtn;
+    private JLabel assBtn;
+    private JLabel browBtn;
+    private JPanel DefaultPanel;
+    private JLabel jLabel1;
     private javax.swing.JLabel mBtn;
-    private javax.swing.JInternalFrame oFrame;
     private javax.swing.JLabel sBtn;
-    private javax.swing.JButton setBtn;
+    private javax.swing.JLabel setBtn;
     private javax.swing.JPanel winBtns;
     private javax.swing.JLabel xBtn;
+    private JLabel lxicon;
+    private JPanel OpenersPanel;
+    private JPanel AssPanel;
+    private JPanel BrowPanel;
+    private JPanel SetPanel;
+    private JScrollPane ScrollAss;
+    private JTable AssTable;
+
+    //Toaster
+    private Toaster toaster;
     // End of variables declaration
 }
