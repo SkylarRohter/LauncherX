@@ -360,7 +360,6 @@ public class MainMenu extends JFrame {
 
         pointsBar.setBackground(UIUtils.COLOR_INTERACTIVE);
         pointsBar.setForeground(UIUtils.COLOR_INTERACTIVE);
-        pointsBar.setBorder(10);
 
         ShopLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 36)); // NOI18N
         ShopLabel.setForeground(UIUtils.COLOR_INTERACTIVE);
