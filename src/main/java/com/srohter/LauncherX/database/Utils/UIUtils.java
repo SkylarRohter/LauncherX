@@ -9,11 +9,11 @@ public class UIUtils {
     public static final Font FONT_FORGOT_PASSWORD = new Font("Segoe UI", Font.PLAIN, 12);
 
     public static final Color COLOR_OUTLINE = new Color(103, 112, 120);
+    public static final Color COLOR_BACKGROUND_DARKER = new Color(25, 37, 46);
     public static final Color COLOR_BACKGROUND = new Color(37, 51, 61);
     public static final Color COLOR_INTERACTIVE = new Color(127, 253, 253);
     public static final Color COLOR_INTERACTIVE_DARKER = new Color(83, 169, 169);
     public static final Color OFFWHITE = new Color(229, 229, 229);
-    public static final Color COLOR_BACKGROUND_DARKER = new Color(25, 37, 46);
     public static final Color WHITE = new Color(255, 255, 255);
 
     public static final String BUTTON_TEXT_LOGIN = "Login";
