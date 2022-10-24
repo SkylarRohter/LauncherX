@@ -41,6 +41,7 @@ public class MainMenu extends JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
+        //TODO initComps
 
         loginButton = new javax.swing.JLabel();
         MainPanel = new javax.swing.JPanel();
@@ -138,6 +139,7 @@ public class MainMenu extends JFrame {
         OpenersBtn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         OpenersBtn.setText("Openers");
         OpenersBtn.setOpaque(true);
+        OpenersBtn.addMouseListener(new ButtonStyle(OpenersBtn,UIUtils.COLOR_INTERACTIVE,UIUtils.COLOR_INTERACTIVE_DARKER));
         OpenersBtn.addMouseListener(new MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 toaster.warn("Hello");
@@ -146,17 +148,6 @@ public class MainMenu extends JFrame {
                 BrowPanel.setVisible(false);
                 SetPanel.setVisible(false);
                 OpenersPanel.setVisible(true);//TRUE
-            }
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                OpenersBtn.setBackground(UIUtils.COLOR_INTERACTIVE_DARKER);
-                OpenersBtn.setForeground(UIUtils.COLOR_BACKGROUND_DARKER);
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                OpenersBtn.setBackground(UIUtils.COLOR_INTERACTIVE);
-                OpenersBtn.setForeground(UIUtils.COLOR_BACKGROUND);
             }
         });
 
@@ -167,6 +158,7 @@ public class MainMenu extends JFrame {
         assBtn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         assBtn.setText("Assignments");
         assBtn.setOpaque(true);
+        assBtn.addMouseListener(new ButtonStyle(assBtn,UIUtils.COLOR_INTERACTIVE,UIUtils.COLOR_INTERACTIVE_DARKER));
         assBtn.addMouseListener(new MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DefaultPanel.setVisible(false);
@@ -174,17 +166,6 @@ public class MainMenu extends JFrame {
                 BrowPanel.setVisible(false);
                 SetPanel.setVisible(false);
                 AssPanel.setVisible(true);//TRUE
-            }
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                assBtn.setBackground(UIUtils.COLOR_INTERACTIVE_DARKER);
-                assBtn.setForeground(UIUtils.COLOR_BACKGROUND_DARKER);
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                assBtn.setBackground(UIUtils.COLOR_INTERACTIVE);
-                assBtn.setForeground(UIUtils.COLOR_BACKGROUND);
             }
         });
 
@@ -194,6 +175,7 @@ public class MainMenu extends JFrame {
         browBtn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         browBtn.setText("Shop");
         browBtn.setOpaque(true);
+        browBtn.addMouseListener(new ButtonStyle(browBtn,UIUtils.COLOR_INTERACTIVE,UIUtils.COLOR_INTERACTIVE_DARKER));
         browBtn.addMouseListener(new MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DefaultPanel.setVisible(false);
@@ -201,17 +183,6 @@ public class MainMenu extends JFrame {
                 SetPanel.setVisible(false);
                 AssPanel.setVisible(false);
                 BrowPanel.setVisible(true);//TRUE
-            }
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                browBtn.setBackground(UIUtils.COLOR_INTERACTIVE_DARKER);
-                browBtn.setForeground(UIUtils.COLOR_BACKGROUND_DARKER);
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                browBtn.setBackground(UIUtils.COLOR_INTERACTIVE);
-                browBtn.setForeground(UIUtils.COLOR_BACKGROUND);
             }
         });
 
@@ -221,6 +192,7 @@ public class MainMenu extends JFrame {
         setBtn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         setBtn.setText("Settings");
         setBtn.setOpaque(true);
+        setBtn.addMouseListener(new ButtonStyle(setBtn,UIUtils.COLOR_INTERACTIVE,UIUtils.COLOR_INTERACTIVE_DARKER));
         setBtn.addMouseListener(new MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DefaultPanel.setVisible(false);
@@ -229,19 +201,7 @@ public class MainMenu extends JFrame {
                 AssPanel.setVisible(false);
                 SetPanel.setVisible(true);//TRUE
             }
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                setBtn.setBackground(UIUtils.COLOR_INTERACTIVE_DARKER);
-                setBtn.setForeground(UIUtils.COLOR_BACKGROUND_DARKER);
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                setBtn.setBackground(UIUtils.COLOR_INTERACTIVE);
-                setBtn.setForeground(UIUtils.COLOR_BACKGROUND);
-            }
         });
-
         winBtns.setBackground(UIUtils.COLOR_BACKGROUND);
         winBtns.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -318,7 +278,7 @@ public class MainMenu extends JFrame {
         DefaultPanel.setVisible(true);
 
         //*********************************************************************************************************************************************
-
+        //TODO Openers Panel Config
 
         javax.swing.GroupLayout OpenersPanelLayout = new javax.swing.GroupLayout(OpenersPanel);
         OpenersPanel.setBackground(Color.RED);
@@ -334,7 +294,7 @@ public class MainMenu extends JFrame {
 
 
         //*********************************************************************************************************************************************
-
+        //TODO Ass Panel Config
 
         AssTable.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
@@ -385,31 +345,32 @@ public class MainMenu extends JFrame {
 
 
         //*********************************************************************************************************************************************
-
+        //TODO Brow Panel Config
 
         BrowPanel.setBackground(new java.awt.Color(37, 51, 61));
 
         pointsLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        pointsLabel.setForeground(new java.awt.Color(127, 253, 253));
+        pointsLabel.setForeground(UIUtils.COLOR_INTERACTIVE);
         pointsLabel.setText("Points: ");
 
         pointsCounter.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        pointsCounter.setForeground(new java.awt.Color(127, 253, 253));
+        pointsCounter.setForeground(UIUtils.COLOR_INTERACTIVE);
         pointsCounter.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         pointsCounter.setText("1000");
 
-        pointsBar.setBackground(new java.awt.Color(25, 37, 46));
-        pointsBar.setForeground(new java.awt.Color(127, 253, 253));
+        pointsBar.setBackground(UIUtils.COLOR_INTERACTIVE);
+        pointsBar.setForeground(UIUtils.COLOR_INTERACTIVE);
+        pointsBar.setBorder(10);
 
         ShopLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 36)); // NOI18N
-        ShopLabel.setForeground(new java.awt.Color(127, 253, 253));
+        ShopLabel.setForeground(UIUtils.COLOR_INTERACTIVE);
         ShopLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ShopLabel.setText("Shop");
         ShopLabel.setToolTipText("");
 
-        ShopBar.setBackground(new java.awt.Color(127, 253, 253));
-        ShopBar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(127, 253, 253), 1, true));
-        ShopBar.setForeground(new java.awt.Color(127, 253, 253));
+        ShopBar.setBackground(UIUtils.COLOR_INTERACTIVE);
+        ShopBar.setBorder(new javax.swing.border.LineBorder(UIUtils.COLOR_INTERACTIVE, 1, true));
+        ShopBar.setForeground(UIUtils.COLOR_INTERACTIVE);
         ShopBar.setPreferredSize(new java.awt.Dimension(100, 2));
 
         javax.swing.GroupLayout ShopBarLayout = new javax.swing.GroupLayout(ShopBar);
@@ -425,7 +386,7 @@ public class MainMenu extends JFrame {
 
         YellowPanel.setBackground(new java.awt.Color(25, 37, 46));
 
-        YellowIcon.setBackground(new java.awt.Color(255, 255, 204));
+        YellowIcon.setBackground(UIUtils.SHOP_YELLOW);
         YellowIcon.setPreferredSize(new java.awt.Dimension(50, 50));
 
         javax.swing.GroupLayout YellowIconLayout = new javax.swing.GroupLayout(YellowIcon);
@@ -441,7 +402,7 @@ public class MainMenu extends JFrame {
 
         YellowLabel.setBackground(new java.awt.Color(0, 0, 0));
         YellowLabel.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        YellowLabel.setForeground(new java.awt.Color(255, 255, 204));
+        YellowLabel.setForeground(UIUtils.SHOP_YELLOW);
         YellowLabel.setText("> YELLOW - 6000");
 
         javax.swing.GroupLayout YellowPanelLayout = new javax.swing.GroupLayout(YellowPanel);
@@ -461,7 +422,7 @@ public class MainMenu extends JFrame {
 
         OrangePanel.setBackground(new java.awt.Color(25, 37, 46));
 
-        OrangeIcon.setBackground(new java.awt.Color(255, 204, 153));
+        OrangeIcon.setBackground(UIUtils.SHOP_ORANGE);
         OrangeIcon.setPreferredSize(new java.awt.Dimension(50, 50));
 
         javax.swing.GroupLayout OrangeIconLayout = new javax.swing.GroupLayout(OrangeIcon);
@@ -477,7 +438,7 @@ public class MainMenu extends JFrame {
 
         orangeLabel.setBackground(new java.awt.Color(0, 0, 0));
         orangeLabel.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        orangeLabel.setForeground(new java.awt.Color(255, 204, 153));
+        orangeLabel.setForeground(UIUtils.SHOP_ORANGE);
         orangeLabel.setText("> ORANGE - 5000");
 
         javax.swing.GroupLayout OrangePanelLayout = new javax.swing.GroupLayout(OrangePanel);
@@ -502,7 +463,7 @@ public class MainMenu extends JFrame {
 
         RedPanel.setBackground(new java.awt.Color(25, 37, 46));
 
-        RedIcon.setBackground(new java.awt.Color(255, 102, 102));
+        RedIcon.setBackground(UIUtils.SHOP_RED);
         RedIcon.setPreferredSize(new java.awt.Dimension(50, 50));
 
         javax.swing.GroupLayout RedIconLayout = new javax.swing.GroupLayout(RedIcon);
@@ -518,7 +479,7 @@ public class MainMenu extends JFrame {
 
         RedLabel.setBackground(new java.awt.Color(0, 0, 0));
         RedLabel.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        RedLabel.setForeground(new java.awt.Color(255, 102, 102));
+        RedLabel.setForeground(UIUtils.SHOP_RED);
         RedLabel.setText("> RED - 1000");
 
         javax.swing.GroupLayout RedPanelLayout = new javax.swing.GroupLayout(RedPanel);
@@ -539,7 +500,7 @@ public class MainMenu extends JFrame {
 
         AquaPanel.setBackground(new java.awt.Color(25, 37, 46));
 
-        AquaIcon.setBackground(new java.awt.Color(127, 253, 253));
+        AquaIcon.setBackground(UIUtils.SHOP_AQUA);
         AquaIcon.setPreferredSize(new java.awt.Dimension(50, 50));
 
         javax.swing.GroupLayout AquaIconLayout = new javax.swing.GroupLayout(AquaIcon);
@@ -555,7 +516,7 @@ public class MainMenu extends JFrame {
 
         AquaLabel.setBackground(new java.awt.Color(0, 0, 0));
         AquaLabel.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        AquaLabel.setForeground(new java.awt.Color(127, 253, 253));
+        AquaLabel.setForeground(UIUtils.SHOP_AQUA);
         AquaLabel.setText("> AQUA - FREE");
 
         javax.swing.GroupLayout AquaPanelLayout = new javax.swing.GroupLayout(AquaPanel);
@@ -576,7 +537,7 @@ public class MainMenu extends JFrame {
 
         PurplePanel.setBackground(new java.awt.Color(25, 37, 46));
 
-        PurpleIcon.setBackground(new java.awt.Color(153, 153, 255));
+        PurpleIcon.setBackground(UIUtils.SHOP_PURPLE);
         PurpleIcon.setPreferredSize(new java.awt.Dimension(50, 50));
 
         javax.swing.GroupLayout PurpleIconLayout = new javax.swing.GroupLayout(PurpleIcon);
@@ -592,7 +553,7 @@ public class MainMenu extends JFrame {
 
         PurpleLabel.setBackground(new java.awt.Color(0, 0, 0));
         PurpleLabel.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        PurpleLabel.setForeground(new java.awt.Color(153, 153, 255));
+        PurpleLabel.setForeground(UIUtils.SHOP_PURPLE);
         PurpleLabel.setText("> PURPLE - 9000");
 
         javax.swing.GroupLayout PurplePanelLayout = new javax.swing.GroupLayout(PurplePanel);
@@ -613,7 +574,7 @@ public class MainMenu extends JFrame {
 
         PinkPanel.setBackground(new java.awt.Color(25, 37, 46));
 
-        PinkIcon.setBackground(new java.awt.Color(255, 204, 204));
+        PinkIcon.setBackground(UIUtils.SHOP_PINK);
         PinkIcon.setPreferredSize(new java.awt.Dimension(50, 50));
 
         javax.swing.GroupLayout PinkIconLayout = new javax.swing.GroupLayout(PinkIcon);
@@ -629,7 +590,7 @@ public class MainMenu extends JFrame {
 
         PinkLabel.setBackground(new java.awt.Color(0, 0, 0));
         PinkLabel.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        PinkLabel.setForeground(new java.awt.Color(255, 204, 204));
+        PinkLabel.setForeground(UIUtils.SHOP_PINK);
         PinkLabel.setText("> PINK - 8000");
 
         javax.swing.GroupLayout PinkPanelLayout = new javax.swing.GroupLayout(PinkPanel);
@@ -651,7 +612,7 @@ public class MainMenu extends JFrame {
         Colors.setBackground(new java.awt.Color(25, 37, 46));
 
         ColorsLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
-        ColorsLabel.setForeground(new java.awt.Color(127, 253, 253));
+        ColorsLabel.setForeground(UIUtils.COLOR_INTERACTIVE);
         ColorsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ColorsLabel.setText("Your Colors");
         ColorsLabel.setToolTipText("Unlock more colors with points");
@@ -698,7 +659,7 @@ public class MainMenu extends JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        Color1.setBackground(new java.awt.Color(127, 253, 253));
+        Color1.setBackground(UIUtils.SHOP_AQUA);
         Color1.setPreferredSize(new java.awt.Dimension(100, 0));
 
         javax.swing.GroupLayout Color1Layout = new javax.swing.GroupLayout(Color1);
@@ -852,7 +813,7 @@ public class MainMenu extends JFrame {
 
 
         //*********************************************************************************************************************************************
-
+        //TODO Settings Panel
 
         javax.swing.GroupLayout SetPanelLayout = new javax.swing.GroupLayout(SetPanel);
         SetPanel.setBackground(Color.YELLOW);
@@ -868,7 +829,7 @@ public class MainMenu extends JFrame {
 
 
         //*********************************************************************************************************************************************
-
+        //TODO Main menu panel
         javax.swing.GroupLayout MainPanelLayout = new javax.swing.GroupLayout(MainPanel);
         MainPanel.setLayout(MainPanelLayout);
         MainPanelLayout.setHorizontalGroup(
@@ -966,15 +927,6 @@ public class MainMenu extends JFrame {
         System.out.println(".");
     }
 
-    private void setBtnActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void OpenersBtnMouseClicked(java.awt.event.MouseEvent evt) {
-        // TODO add your handling code here:
-
-    }
-
 
     public void main() {
         /* Set the Nimbus look and feel */
@@ -1034,6 +986,9 @@ public class MainMenu extends JFrame {
             loginButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         }
     };
+
+    //TODO Fields
+
     private JLabel AccentLabel;
     private JPanel LogoBorder;
     private JPanel MainPanel;

@@ -1,28 +1,28 @@
 package com.srohter.LauncherX.database.Utils;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public class ButtonStyle {
-    public ButtonStyle(JLabel label) {
+public class ButtonStyle extends MouseAdapter {
+    public ButtonStyle(JLabel label,Color mainColor,Color secondColor){
         this.label = label;
-        mouseClicked();
-        mouseEntered();
-        mouseExited();
+        this.mainColor=mainColor;
+        this.secondColor=secondColor;
     }
-
     private JLabel label;
+    private Color mainColor;
+    private Color secondColor;
 
-    public void mouseClicked() {
-
-    }
-
-    public void mouseEntered() {
-        label.setBackground(UIUtils.COLOR_INTERACTIVE_DARKER);
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        label.setBackground(secondColor);
         label.setForeground(UIUtils.COLOR_BACKGROUND_DARKER);
     }
-
-    public void mouseExited() {
-        label.setBackground(UIUtils.COLOR_INTERACTIVE);
+    @Override
+    public void mouseExited(MouseEvent e) {
+        label.setBackground(mainColor);
         label.setForeground(UIUtils.COLOR_BACKGROUND);
     }
 }
